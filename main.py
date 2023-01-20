@@ -1,9 +1,9 @@
 
 import pygame
 from pygame.locals import *
-from Game_Button import IDraw , Game_Button
+from GUI.Game_Button import Game_Button
 from Game_utils.Point import Point
-from IClick import IClick
+from Interface.IClick import IClick
 
 pygame.init()
 screen = pygame.display.set_mode((640, 480))
@@ -19,13 +19,10 @@ def handle_mouse_click(clickables : [IClick]):
 
 
 def main():
-    buttons = [Game_Button(7,100,100,Color(192,192,192),Point(1,1)),
-               Game_Button(8, 100,100, Color(192,192,192), Point(100, 100))]
+    buttons = [Game_Button('7',100, 100,Color(192,192,192), Color(0, 255, 255), Point(0,0)),
+               Game_Button('8', 100, 100, Color(192,192,192), Color(0, 255, 255), Point(100, 100))]
 
     while True:
-        for button in buttons:
-            button.draw(screen)
-
         for event in pygame.event.get():
             if event.type == QUIT:
                 pygame.quit()
@@ -34,8 +31,10 @@ def main():
             if event.type == pygame.MOUSEBUTTONDOWN:
                handle_mouse_click(buttons)
 
+        for button in buttons:
+            button.draw(screen)
 
-        #clock.tick(60)
+        clock.tick(30)
         pygame.display.flip()
 
 main()
