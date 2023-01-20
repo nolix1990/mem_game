@@ -73,6 +73,9 @@ class Game_Button(IDraw,IClick):
     def fllip(self):
         self.flliped = not self.flliped
 
+    def is_equal(self,button2)->bool:
+        return self.text == button2.text
+
     @staticmethod
     def setTimeDeltaToFlip(timeInSec):
         Game_Button.TimeDeltaToFlip = timeInSec
