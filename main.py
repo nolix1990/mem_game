@@ -1,6 +1,8 @@
 
 import pygame
 from pygame.locals import *
+
+from GUI.GameBoard import GameBoard
 from GUI.Game_Button import Game_Button
 from Game_utils.Point import Point
 from Interface.IClick import IClick
@@ -9,18 +11,15 @@ pygame.init()
 screen = pygame.display.set_mode((640, 480))
 clock = pygame.time.Clock()
 
-def handle_mouse_click(clickables : [IClick]):
+def handle_mouse_click(game_board):
     left, middle, right = pygame.mouse.get_pressed()
     if left:
-        for clickable_obj in clickables:
-            p = Point(pygame.mouse.get_pos()[0],pygame.mouse.get_pos()[1])
-            if clickable_obj.is_clicked(p):
-                clickable_obj.handle_click(p)
+        game_board.handle_click(Point(pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1]))
 
 
 def main():
-    buttons = [Game_Button('7',100, 100,Color(192,192,192), Color(0, 255, 255), Point(0,0)),
-               Game_Button('8', 100, 100, Color(192,192,192), Color(0, 255, 255), Point(100, 100))]
+
+    board = GameBoard(600,600,6,6)
 
     while True:
         for event in pygame.event.get():
@@ -29,10 +28,9 @@ def main():
                 return
 
             if event.type == pygame.MOUSEBUTTONDOWN:
-               handle_mouse_click(buttons)
+                handle_mouse_click(board)
 
-        for button in buttons:
-            button.draw(screen)
+        board.draw(screen)
 
         clock.tick(30)
         pygame.display.flip()
