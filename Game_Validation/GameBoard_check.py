@@ -15,6 +15,7 @@ class GameBoard_check:
         counter_arr = [0]*int(self.size/2)
         for idx in range(self.size): counter_arr[mat[idx]] += 1
 
+
         for val in counter_arr:
             if val != 2 : raise Exception("all the values must appear twice")
 
