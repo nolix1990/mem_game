@@ -23,6 +23,7 @@ class Game_Button(IDraw,IClick):
         self.fontColor = fontColor
         self.topLeftPoint = topLeftPoint
         self.flliped = False
+        self.finished = False
         self.AntiAlias = False
         self.rect = Rect(self.topLeftPoint.x, self.topLeftPoint.y, width, height)
         self.fontType = fontType
@@ -60,6 +61,8 @@ class Game_Button(IDraw,IClick):
                (coordinate.y >= self.rect.top and coordinate.y <= self.rect.bottom)
 
     def get_is_flliped(self):
+        if self.finished:
+            return True
         if self.flliped:
             timedelta = datetime.now() - self.last_click_time
             if timedelta.total_seconds() > self.TimeDeltaToFlip:
@@ -72,6 +75,12 @@ class Game_Button(IDraw,IClick):
 
     def fllip(self):
         self.flliped = not self.flliped
+
+    def finish(self):
+        self.finished = True
+
+    def hide(self):
+        self.flliped = False
 
     def is_equal(self,button2)->bool:
         return self.text == button2.text

@@ -3,12 +3,13 @@ import pygame
 from pygame.locals import *
 
 from GUI.GameBoard import GameBoard
-from GUI.Game_Button import Game_Button
+from GameLogic import GameLogic
 from Game_utils.Point import Point
-from Interface.IClick import IClick
 
 pygame.init()
-screen = pygame.display.set_mode((640, 480))
+ScreenWidthpx = 1000
+ScreenHieghpx = 1000
+screen = pygame.display.set_mode((ScreenWidthpx, ScreenHieghpx))
 clock = pygame.time.Clock()
 
 def handle_mouse_click(game_board):
@@ -18,8 +19,8 @@ def handle_mouse_click(game_board):
 
 
 def main():
-
-    board = GameBoard(600,600,6,6)
+    gameLogicService = GameLogic()
+    board = GameBoard(ScreenWidthpx,ScreenHieghpx,4,4, gameLogicService)
 
     while True:
         for event in pygame.event.get():
