@@ -28,6 +28,6 @@ class GameBoard:
         game_values = [i for i in range(int(size/2))]
         game_values.extend([i for i in range (int(size / 2))])
         random.shuffle(game_values)
-
+        
         return game_values
 
