@@ -100,3 +100,9 @@ class GameBoard(IDraw,IClick):
                 if self.game_matrix[row][col].is_clicked(coordinate):
                     self.game_matrix[row][col].handle_click(coordinate)
                     self.__gameLogicService.handle_click(self.game_matrix[row][col])
+                    self.show_game_end()
+
+
+    def show_game_end(self):
+        if self.__gameLogicService.game_end:
+            print("ti boker tov")

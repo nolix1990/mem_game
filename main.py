@@ -9,6 +9,8 @@ from Game_utils.Point import Point
 pygame.init()
 ScreenWidthpx = 1000
 ScreenHieghpx = 1000
+window_width = 2
+window_height = 2
 screen = pygame.display.set_mode((ScreenWidthpx, ScreenHieghpx))
 clock = pygame.time.Clock()
 
@@ -19,8 +21,8 @@ def handle_mouse_click(game_board):
 
 
 def main():
-    gameLogicService = GameLogic()
-    board = GameBoard(ScreenWidthpx,ScreenHieghpx,4,4, gameLogicService)
+    gameLogicService = GameLogic(window_height,window_width)
+    board = GameBoard(ScreenWidthpx,ScreenHieghpx,window_width,window_height, gameLogicService)
 
     while True:
         for event in pygame.event.get():
