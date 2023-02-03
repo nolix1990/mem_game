@@ -6,9 +6,12 @@ from Interface.IGameLogic import IGameLogic
 
 
 class GameLogic(IGameLogic):
-    def __init__(self):
+    def __init__(self,window_height,window_width):
         self.maxClieckedButtons = 2
         self.clickedButtons = []
+        self.game_size = window_width*window_height
+        self.num_of_flipped_buttons = 0
+        self.game_end = False
 
     def handle_click(self, button:Game_Button):
         self.clickedButtons.append(button)
@@ -34,6 +37,7 @@ class GameLogic(IGameLogic):
         if button.is_equal(button2) == True and button.flliped and button2.flliped:
             button.finish()
             button2.finish()
+            self.num_of_flipped_buttons = self.num_of_flipped_buttons + 2
             self.check_game_finished()
             self.clickedButtons = []
         elif (not button.flliped and not button2.flliped):
@@ -42,4 +46,5 @@ class GameLogic(IGameLogic):
         
 
     def check_game_finished(self):
-        pass
+        if self.num_of_flipped_buttons == self.game_size:
+            self.game_end = True
